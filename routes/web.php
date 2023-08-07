@@ -21,7 +21,9 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function() { return view('dashboard'); })->name('dashboard');
 
-    Route::get('/user-management', [UserController::class, 'userPage'])->name('user-management');
+    Route::middleware('admin')->group(function () {
+        Route::get('/user-management', [UserController::class, 'userPage'])->name('user-management');
+    });
 });
 
 require __DIR__ . '/auth.php';
