@@ -7,9 +7,12 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-end pb-6">
-                <a href="{{ route('add-user-page') }}"><button class="p-3 bg-gray-500 text-white">Add User</button></a>
-            </div>
+            @if (Auth::user()->role == 'superadmin')
+                <div class="flex justify-end pb-6">
+                    <a href="{{ route('add-user-page') }}"><button class="p-3 bg-gray-500 text-white">Add
+                            User</button></a>
+                </div>
+            @endif
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <table class="table w-full text-gray-400 border-separate space-y-6 text-sm">
@@ -54,10 +57,12 @@
                                             emp text-gray-400 hover:text-gray-500 mx-2">
                                             <i class="material-icons-outlined text-base">edit</i>
                                         </a>
-                                        <a id="{{ $user->id }}"
-                                            class="delete-user hover:cursor-pointer emp text-gray-400 hover:text-gray-500  ml-2">
-                                            <i class="material-icons-round text-base">delete_outline</i>
-                                        </a>
+                                        @if (Auth::user()->role == 'superadmin')
+                                            <a id="{{ $user->id }}"
+                                                class="delete-user hover:cursor-pointer emp text-gray-400 hover:text-gray-500  ml-2">
+                                                <i class="material-icons-round text-base">delete_outline</i>
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

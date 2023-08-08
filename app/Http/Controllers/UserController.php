@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function userPage()
     {
-        $users = User::get();
+        $users = User::orderBy('name', 'asc')->get();
         return view('user-management.index', compact('users'));
     }
 
@@ -25,7 +25,6 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:4',
             'email' => 'required|email',
-            'role' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -33,13 +32,13 @@ class UserController extends Controller
         }
 
         try {
-            $user = User::create([
+            User::create([
                 'name' => $request['name'],
                 'email' => $request['email'],
-                'username' => $request['name'] . rand(pow(10, 8 - 1), pow(10, 8) - 1),
+                'username' => str_replace(' ', '', $request['name']) . rand(pow(10, 5 - 1), pow(10, 5) - 1),
                 'password' => $request['password'] ? $request['password'] : 'password',
                 'remember_token' => Str::random(10),
-                'role' => $request['role'],
+                'role' => $request['role'] ? $request['role'] : 'user',
             ]);
 
             return redirect('/user-management');
@@ -63,7 +62,6 @@ class UserController extends Controller
             'name' => 'required|min:4',
             'email' => 'required|email',
             'username' => 'required',
-            'role' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -77,7 +75,7 @@ class UserController extends Controller
                 'email' => $request['email'],
                 'username' => $request['username'],
                 'password' => $request['password'] ? $request['password'] : 'password',
-                'role' => $request['role'],
+                'role' => $request['role'] ? $request['role'] : $user->role,
             ]);
 
             return redirect('/user-management');

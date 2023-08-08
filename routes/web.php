@@ -25,10 +25,10 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('admin')->group(function () {
         Route::get('/user-management', [UserController::class, 'userPage'])->name('user-management-page');
-        Route::get('/add-user', [UserController::class, 'addUserPage'])->name('add-user-page');
+        Route::get('/add-user', [UserController::class, 'addUserPage'])->middleware('superadmin')->name('add-user-page');
         Route::get('/user/{userId}', [UserController::class, 'editUserPage'])->name('edit-user-page');
-        Route::delete('/user/{userId}', [UserController::class, 'deleteUser'])->name('delete-user');
-        Route::post('/user', [UserController::class, 'createUser'])->name('create-user');
+        Route::delete('/user/{userId}', [UserController::class, 'deleteUser'])->middleware('superadmin')->name('delete-user');
+        Route::post('/user', [UserController::class, 'createUser'])->middleware('superadmin')->name('create-user');
         Route::patch('/user/{userId}', [UserController::class, 'updateUser'])->name('update-user');
     });
 });

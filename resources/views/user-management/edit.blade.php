@@ -45,19 +45,24 @@
                         @error('password')
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
-                        <div class="flex flex-col gap-2">
-                            <label for="role">Role <span class="text-red-500 text-sm">*</span></label>
-                            <select value="{{ old('role', $user->role) }}" class="p-2 w-1/2 border-2 rounded-lg"
-                                name="role" id="role" required>
-                                <option value="user" @if ($user->role == 'user') selected @endif>User</option>
-                                <option value="admin" @if ($user->role == 'admin') selected @endif>Admin</option>
-                                <option value="superadmin" @if ($user->role == 'superadmin') selected @endif>Superadmin
-                                </option>
-                            </select>
-                        </div>
-                        @error('role')
-                            <div class="text-red-500">{{ $message }}</div>
-                        @enderror
+                        @if (Auth::user()->role == 'superadmin')
+                            <div class="flex flex-col gap-2">
+                                <label for="role">Role <span class="text-red-500 text-sm">*</span></label>
+                                <select value="{{ old('role', $user->role) }}" class="p-2 w-1/2 border-2 rounded-lg"
+                                    name="role" id="role" required>
+                                    <option value="user" @if ($user->role == 'user') selected @endif>User
+                                    </option>
+                                    <option value="admin" @if ($user->role == 'admin') selected @endif>Admin
+                                    </option>
+                                    <option value="superadmin" @if ($user->role == 'superadmin') selected @endif>
+                                        Superadmin
+                                    </option>
+                                </select>
+                            </div>
+                            @error('role')
+                                <div class="text-red-500">{{ $message }}</div>
+                            @enderror
+                        @endif
                         <div class="mt-4 w-1/2 flex justify-end">
                             <button type="submit" class="p-3 bg-gray-500 text-white">Simpan</button>
                         </div>
