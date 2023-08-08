@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/user/{userId}', [UserController::class, 'editUserPage'])->name('edit-user-page');
         Route::delete('/user/{userId}', [UserController::class, 'deleteUser'])->name('delete-user');
         Route::post('/user', [UserController::class, 'createUser'])->name('create-user');
+        Route::patch('/user/{userId}', [UserController::class, 'updateUser'])->name('update-user');
     });
 });
 

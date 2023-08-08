@@ -22,20 +22,19 @@
                         @enderror
                         <div class="flex flex-col gap-2">
                             <label for="email">Email <span class="text-red-500 text-sm">*</span></label>
-                            <input type="text" id="email" name="email" class="w-1/2 p-2 border-2 rounded-lg"
-                                required>
+                            <input value="{{ old('email') }}" type="text" id="email" name="email"
+                                class="w-1/2 p-2 border-2 rounded-lg" required>
                         </div>
                         @error('email')
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
-                        {{-- <div class="flex flex-col gap-2">
+                        <div class="flex flex-col gap-2">
                             <label for="password">Password</label>
-                            <input type="text" id="password" name="password" class="w-1/2 p-2 border-2 rounded-lg"
-                                required>
+                            <input type="text" id="password" name="password" class="w-1/2 p-2 border-2 rounded-lg">
                         </div>
                         @error('password')
                             <div class="text-red-500">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                         <div class="flex flex-col gap-2">
                             <label for="role">Role <span class="text-red-500 text-sm">*</span></label>
                             <select class="p-2 w-1/2 border-2 rounded-lg" name="role" id="role" required>

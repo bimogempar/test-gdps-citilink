@@ -25,7 +25,6 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:4',
             'email' => 'required|email',
-            // 'password' => 'required|password',
             'role' => 'required',
         ]);
 
@@ -56,6 +55,35 @@ class UserController extends Controller
             return redirect('user-management');
         }
         return view('user-management.edit', compact('user'));
+    }
+
+    public function updateUser(Request $request, $userId)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:4',
+            'email' => 'required|email',
+            'username' => 'required',
+            'role' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        try {
+            $user = User::findOrFail($userId);
+            $user->update([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'username' => $request['username'],
+                'password' => $request['password'] ? $request['password'] : 'password',
+                'role' => $request['role'],
+            ]);
+
+            return redirect('/user-management');
+        } catch (\Exception $e) {
+            return back()->withErrors($e)->withInput();
+        }
     }
 
     public function deleteUser($userId)
