@@ -19,7 +19,7 @@
                 @auth
                     @if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin')
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <x-nav-link :href="route('user-management')" :active="request()->routeIs('user-management')">
+                            <x-nav-link :href="route('user-management-page')" :active="request()->routeIs('user-management-page')">
                                 User Management
                             </x-nav-link>
                         </div>

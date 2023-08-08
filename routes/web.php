@@ -19,10 +19,14 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function() { return view('dashboard'); })->name('dashboard');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
     Route::middleware('admin')->group(function () {
-        Route::get('/user-management', [UserController::class, 'userPage'])->name('user-management');
+        Route::get('/user-management', [UserController::class, 'userPage'])->name('user-management-page');
+        Route::get('/user/{userId}', [UserController::class, 'editUserPage'])->name('edit-user-page');
+        Route::delete('/user/{userId}', [UserController::class, 'deleteUser'])->name('delete-user');
     });
 });
 
