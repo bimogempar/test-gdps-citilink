@@ -808,6 +808,9 @@ select {
 .w-12 {
   width: 3rem;
 }
+.w-1\/2 {
+  width: 50%;
+}
 .max-w-6xl {
   max-width: 72rem;
 }
@@ -874,6 +877,9 @@ select {
 }
 .justify-between {
   justify-content: space-between;
+}
+.gap-2 {
+  gap: 0.5rem;
 }
 .space-x-6 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -1077,6 +1083,9 @@ select {
 .pt-8 {
   padding-top: 2rem;
 }
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
 .text-center {
   text-align: center;
 }
@@ -1178,6 +1187,10 @@ select {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 .underline {
   text-decoration-line: underline;

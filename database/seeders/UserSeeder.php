@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('superadmin'),
             'role' => 'superadmin',
             'created_at' => now(),
+            'upadted_at' => now(),
             'remember_token' => Str::random(10),
         ]);
 
@@ -38,6 +39,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('admin'),
             'role' => 'admin',
             'created_at' => now(),
+            'upadted_at' => now(),
             'remember_token' => Str::random(10),
         ]);
 
